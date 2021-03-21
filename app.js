@@ -31,7 +31,6 @@ function returnNewProblem() {
     let number = getRandomNumber(arrayOfOperators.length)
     return `${getRandomNumber(10)} ${arrayOfOperators[number]} ${getRandomNumber(10)}`;
 }
-
 // displays current problem and solutions
 function seeCurrentProblem() {
     let currentProblem = returnNewProblem();
@@ -40,8 +39,7 @@ function seeCurrentProblem() {
     expressionDiv.innerText = currentProblem;
 
     // creates answer to problem
-    let unparsedAnswer = parseInt(currentProblem.substring(0, 1)) + currentProblem.substring(2, 3) + parseInt(currentProblem.substring(4));
-    problemAnswer = eval(unparsedAnswer);
+    problemAnswer = eval(currentProblem);
 
     // generate array with correct answer and 3 wrong answers
     let answerArray = [problemAnswer];
@@ -84,22 +82,19 @@ function showMathProblems() {
 function addOperators() {
     if (add.checked) {
         arrayOfOperators.push('+');
-        return true;
     }
     if (subtract.checked) {
         arrayOfOperators.push('-');
-        return true;
     }
     if (multiply.checked) {
         arrayOfOperators.push('*');
-        return true;
     }
     if (divide.checked) {
         arrayOfOperators.push('/');
-        return true;
     }
     if (arrayOfOperators.length == 0) {
-        return alert("Please Check Something");
+        alert("Please Check Something");
+        location.reload();
     }
 }
 
@@ -164,12 +159,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
     startButton.addEventListener('click', () => {
 
-        if (addOperators()) {
+            addOperators();
             showMathProblems();
             takeQuiz();
-            startOver()
-        }
-
+            startOver();
     })
-
 })
